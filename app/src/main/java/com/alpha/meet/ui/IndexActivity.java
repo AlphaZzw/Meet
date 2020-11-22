@@ -15,7 +15,7 @@ import com.alpha.framework.utils.SpUtils;
 import com.alpha.meet.MainActivity;
 import com.alpha.meet.R;
 
-public class IndexActivity extends BaseUIActivity {
+public class IndexActivity extends BaseUIActivity  {
 
     private static final int SKIP_MAIN = 1000;
 

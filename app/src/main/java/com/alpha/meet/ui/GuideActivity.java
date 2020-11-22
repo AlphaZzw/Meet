@@ -14,4 +14,5 @@ public class GuideActivity extends BaseUIActivity {
         setContentView(R.layout.activity_guide);
         LogUtils.i("Guide");
     }
+
 }
