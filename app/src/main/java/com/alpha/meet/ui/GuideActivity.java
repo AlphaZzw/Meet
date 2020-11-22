@@ -7,11 +7,17 @@ import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.alpha.framework.base.BasePagerAdapter;
 import com.alpha.framework.base.BaseUIActivity;
 import com.alpha.framework.utils.LogUtils;
 import com.alpha.meet.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GuideActivity extends BaseUIActivity {
+
+    private List<View> mPageList = new ArrayList<>();
 
     private ImageView iv_music_switch;
     private TextView tv_guide_skip;
@@ -19,6 +25,11 @@ public class GuideActivity extends BaseUIActivity {
     private ImageView iv_guide_point_2;
     private ImageView iv_guide_point_3;
     private ViewPager mViewPager;
+
+    private View mView1;
+    private View mView2;
+    private View mView3;
+    private BasePagerAdapter mPagerAdapter;
 
     /**
      * 1.ViewPager : 适配器|帧动画播放
@@ -42,7 +53,21 @@ public class GuideActivity extends BaseUIActivity {
         iv_guide_point_3 = (ImageView) findViewById(R.id.iv_guide_point_3);
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
 
-        View.inflate(this, R.layout.layout_pager_guide_1, null);
+        mView1 = View.inflate(this, R.layout.layout_pager_guide_1, null);
+        mView2 = View.inflate(this, R.layout.layout_pager_guide_2, null);
+        mView3 = View.inflate(this, R.layout.layout_pager_guide_3, null);
+
+        mPageList.add(mView1);
+        mPageList.add(mView2);
+        mPageList.add(mView3);
+
+        //预加载
+        mViewPager.setOffscreenPageLimit(mPageList.size());
+
+        mPagerAdapter = new BasePagerAdapter(mPageList);
+        mViewPager.setAdapter(mPagerAdapter);
+
+
     }
 
 }
