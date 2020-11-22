@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Meet</string>
     <string name="app_index_text">相遇总是最美好的</string>
+    <string name="text_guide_skip">跳过</string>
 </resources>
