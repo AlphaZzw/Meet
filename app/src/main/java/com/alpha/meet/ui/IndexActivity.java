@@ -7,15 +7,15 @@ import android.os.Message;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.alpha.framework.base.BaseUIActivity;
 import com.alpha.framework.entity.Constants;
 import com.alpha.framework.utils.LogUtils;
 import com.alpha.framework.utils.SpUtils;
 import com.alpha.meet.MainActivity;
 import com.alpha.meet.R;
 
-public class IndexActivity extends AppCompatActivity {
+public class IndexActivity extends BaseUIActivity {
 
     private static final int SKIP_MAIN = 1000;
 

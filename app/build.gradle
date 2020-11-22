@@ -34,8 +34,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':framework')
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
 
 }

@@ -1,13 +1,12 @@
 package com.alpha.meet.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
+import com.alpha.framework.base.BaseUIActivity;
 import com.alpha.framework.utils.LogUtils;
 import com.alpha.meet.R;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends BaseUIActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
