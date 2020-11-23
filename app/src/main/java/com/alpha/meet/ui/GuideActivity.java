@@ -1,5 +1,6 @@
 package com.alpha.meet.ui;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,9 @@ public class GuideActivity extends BaseUIActivity {
     private View mView2;
     private View mView3;
     private BasePagerAdapter mPagerAdapter;
+    private ImageView mIv_guide_night;
+    private ImageView mIv_guide_star;
+    private ImageView mIv_guide_smile;
 
     /**
      * 1.ViewPager : 适配器|帧动画播放
@@ -66,6 +70,21 @@ public class GuideActivity extends BaseUIActivity {
 
         mPagerAdapter = new BasePagerAdapter(mPageList);
         mViewPager.setAdapter(mPagerAdapter);
+
+        //帧动画
+        mIv_guide_night = mView2.findViewById(R.id.iv_guide_night);
+        mIv_guide_star = mView1.findViewById(R.id.iv_guide_star);
+        mIv_guide_smile = mView3.findViewById(R.id.iv_guide_smile);
+
+        //播放帧动画
+        AnimationDrawable animNight = (AnimationDrawable) mIv_guide_night.getBackground();
+        animNight.start();
+        AnimationDrawable animSmile = (AnimationDrawable) mIv_guide_smile.getBackground();
+        animSmile.start();
+        AnimationDrawable animStar = (AnimationDrawable) mIv_guide_star.getBackground();
+        animStar.start();
+
+        
 
 
     }
