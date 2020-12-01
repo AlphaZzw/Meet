@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PictureVerification</string>
+
+    <string name="text_succeed_tips">验证成功，用时</string>
+</resources>

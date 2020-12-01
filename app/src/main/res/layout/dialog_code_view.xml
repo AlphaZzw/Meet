@@ -5,9 +5,14 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.alpha.framework.view.TouchPictureView
+    <com.alpha.framework.view.PictureV
         android:id="@+id/mPictureV"
         android:layout_width="300dp"
         android:layout_height="180dp" />
+
+    <SeekBar
+        android:id="@+id/mSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
