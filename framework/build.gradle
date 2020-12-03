@@ -33,5 +33,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api rootProject.ext.dependencies["appcompat"]
+    api 'com.luozm.captcha:captcha:1.1.2'
 
 }

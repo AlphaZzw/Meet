@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.alpha.framework.view.PictureV
-        android:id="@+id/mPictureV"
-        android:layout_width="300dp"
-        android:layout_height="180dp" />
-
-    <SeekBar
-        android:id="@+id/mSeekBar"
+    <com.luozm.captcha.Captcha
+        android:id="@+id/captcha"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:src="@drawable/cat" />
 
 </LinearLayout>
