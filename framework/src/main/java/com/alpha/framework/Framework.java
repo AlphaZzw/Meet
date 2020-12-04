@@ -2,7 +2,7 @@ package com.alpha.framework;
 
 import android.content.Context;
 
-import com.alpha.framework.utils.LogUtils;
+import com.alpha.framework.bmob.BmobManager;
 import com.alpha.framework.utils.SpUtils;
 
 public class Framework {
@@ -26,8 +26,8 @@ public class Framework {
     }
 
     public void initFramework(Context mContext) {
-        LogUtils.i("initFramework");
         SpUtils.getInstance().initSp(mContext);
+        BmobManager.getInstance().initBmob(mContext);
 
     }
 

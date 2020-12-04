@@ -4,6 +4,8 @@ android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"] as int
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
+    useLibrary rootProject.ext.dependencies["httpclient"]
+
     defaultConfig {
         minSdkVersion rootProject.ext.android["minSdkVersion"] as int
         targetSdkVersion rootProject.ext.android["targetSdkVersion"] as int
@@ -33,6 +35,12 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api rootProject.ext.dependencies["appcompat"]
-    api 'com.luozm.captcha:captcha:1.1.2'
+    api rootProject.ext.dependencies["captcha"]
+    api rootProject.ext.dependencies["bmobsdk"]
+    api rootProject.ext.dependencies["rxjava2"]
+    api rootProject.ext.dependencies["rxandroid2"]
+    api rootProject.ext.dependencies["okio"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["okhttp3"]
 
 }

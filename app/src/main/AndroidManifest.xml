@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- BMOB -->
+        <provider
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:authorities="com.alpha.meet.BmobContentProvider"></provider>
+
         <!-- OPPO适配 -->
         <meta-data
             android:name="android.max_aspect"
@@ -20,7 +25,7 @@
             android:value="portrait|landscape" />
 
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.TestActivity"
             android:theme="@style/AppThemeFull">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +36,7 @@
         <activity android:name=".ui.IndexActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.GuideActivity"></activity>
-        <activity android:name=".ui.TestActivity"></activity>
+        <activity android:name=".ui.LoginActivity"></activity>
 
     </application>
 
