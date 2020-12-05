@@ -1,6 +1,6 @@
 package com.alpha.framework.bmob;
 
-import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
 
-public class IMUser extends BmobObject {
+public class IMUser extends BmobUser {
 }

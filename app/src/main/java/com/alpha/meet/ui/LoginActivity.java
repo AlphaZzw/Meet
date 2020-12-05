@@ -26,6 +26,12 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
 
+/**
+ * 1.点击发送的按钮，弹出一个提示框，图片验证码，验证通过之后
+ * 2.!发送验证码，@同时按钮变成不可点击，@按钮开始倒计时，倒计时结束，@按钮可点击，@文字变成“发送”
+ * 3.通过手机号码和验证码进行登录
+ * 4.登录成功之后获取本地对象
+ */
 public class LoginActivity extends BaseUIActivity implements View.OnClickListener {
 
     private TextView tv_test_login;
@@ -84,7 +90,6 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
                 login();
                 break;
             case R.id.btn_send_code:
-
                 sendSMS();
                 break;
         }
