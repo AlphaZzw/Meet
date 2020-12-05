@@ -2,16 +2,60 @@ package com.alpha.meet.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.alpha.framework.base.BaseUIActivity;
+import com.alpha.framework.bmob.BmobManager;
+import com.alpha.framework.bmob.IMUser;
+import com.alpha.framework.entity.Constants;
 import com.alpha.framework.utils.LogUtils;
+import com.alpha.framework.utils.SpUtils;
+import com.alpha.meet.MainActivity;
 import com.alpha.meet.R;
+
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.QueryListener;
 
 public class LoginActivity extends BaseUIActivity implements View.OnClickListener {
 
-    private Button mBtn_login;
+    private TextView tv_test_login;
+    private EditText et_phone;
+    private EditText et_code;
+    private Button btn_send_code;
+    private Button btn_login;
+
+    private static final int H_TIME = 1001;
+    //60s倒计时
+    private static int TIME = 60;
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message message) {
+            switch (message.what) {
+                case H_TIME:
+                    TIME--;
+                    btn_send_code.setText(TIME + "s");
+                    if (TIME > 0) {
+                        mHandler.sendEmptyMessageDelayed(H_TIME, 1000);
+                    } else {
+                        btn_send_code.setEnabled(true);
+                        btn_send_code.setText(getString(R.string.text_login_send));
+                        TIME = 60;
+                    }
+            }
+            return false;
+        }
+    });
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +68,87 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     }
 
     private void initView() {
-        mBtn_login = (Button) findViewById(R.id.btn_login);
-        mBtn_login.setOnClickListener(this);
+        tv_test_login = findViewById(R.id.tv_test_login);
+        et_phone = (EditText) findViewById(R.id.et_phone);
+        et_code = (EditText) findViewById(R.id.et_code);
+        btn_send_code = (Button) findViewById(R.id.btn_send_code);
+        btn_login = (Button) findViewById(R.id.btn_login);
+
+        btn_send_code.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                startActivity(new Intent(this, TestActivity.class));
+                login();
+                break;
+            case R.id.btn_send_code:
+
+                sendSMS();
+                break;
         }
+    }
+
+    private void login() {
+        //1.判断手机号码和验证码不为空
+        final String phone = et_phone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(this, getString(R.string.text_login_phone_null),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final String code = et_code.getText().toString().trim();
+        if (TextUtils.isEmpty(code)) {
+            Toast.makeText(this, getString(R.string.text_login_code_null),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        BmobManager.getInstance().signOrLoginByMobilePhone(phone, code, new LogInListener<IMUser>() {
+            @Override
+            public void done(IMUser imUser, BmobException e) {
+                if (e == null) {
+                    //登录成功
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    //保存手机号码
+                    SpUtils.getInstance().getString(Constants.SP_PHONE, phone);
+                    finish();
+                } else {
+                    if (e.getErrorCode() == 207) {
+                        Toast.makeText(LoginActivity.this, getString(R.string.text_login_code_error), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "ERROR:" + e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+    }
+
+    private void sendSMS() {
+        //1.获取手机号码
+        String phone = et_phone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(this, getString(R.string.text_login_phone_null), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //2.请求验证码
+        BmobManager.getInstance().requestSMS(phone, new QueryListener<Integer>() {
+            @Override
+            public void done(Integer integer, BmobException e) {
+                if (e == null) {
+                    btn_send_code.setEnabled(false);
+                    mHandler.sendEmptyMessage(H_TIME);
+                    Toast.makeText(LoginActivity.this, getString(R.string.text_user_resuest_succeed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    LogUtils.e("SMS:" + e.toString());
+                    Toast.makeText(LoginActivity.this, getString(R.string.text_user_resuest_fail),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

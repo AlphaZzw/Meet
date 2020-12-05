@@ -17,4 +17,41 @@
     <string name="text_login_pw_null">密码不能为空</string>
     <string name="text_login_code_null">验证码不能为空</string>
     <string name="text_login_now_login_text">正在登陆...</string>
+
+    <string name="text_user_add_friend">添加好友</string>
+    <string name="text_user_chat">聊天</string>
+    <string name="text_user_audio_chat">语音聊天</string>
+    <string name="text_user_video_chat">视频聊天</string>
+    <string name="text_user_resuest_succeed">请求成功</string>
+    <string name="text_user_resuest_fail">请求失败</string>
+
+    <string name="text_squate_love">爱</string>
+    <string name="text_star_par_tips_1">请先完善个人信息 - 星座</string>
+    <string name="text_star_par_tips_2">请先完善个人信息 - 年龄</string>
+    <string name="text_star_par_tips_3">请先完善个人信息 - 爱好</string>
+    <string name="text_star_par_tips_4">请先完善个人信息 - 单身状态</string>
+    <string name="text_star_pserver_fail">服务器连接失败</string>
+    <string name="text_server_noti_send_text">请求添加好友</string>
+    <string name="text_server_noti_receiver_text">同意添加好友</string>
+    <string name="text_chat_info_del_text">是否删除该好友?</string>
+    <string name="text_chat_info_del_error">删除失败：</string>
+    <string name="text_upload_photo_loding">正在上传头像..</string>
+    <string name="text_iv_pre_downloading">正在下载..</string>
+    <string name="text_iv_pre_save_fail">保存失败</string>
+    <string name="text_location_search">正在搜索..</string>
+    <string name="text_location">位置</string>
+    <string name="text_login_code_error">验证码错误</string>
+    <string name="text_me_info_update">正在更新资料</string>
+    <string name="text_private_set_open_ing">正在打开..</string>
+    <string name="text_private_set_close_ing">正在关闭..</string>
+    <string name="text_private_set_succeess">打开成功</string>
+    <string name="text_private_set_fail">关闭成功</string>
+    <string name="text_push_ing">正在发布..</string>
+    <string name="text_push_ed_null">请输入内容</string>
+    <string name="text_push_fail">发布失败</string>
+    <string name="text_shar_save_ing">正在保存..</string>
+    <string name="text_test_login_fail">用户名或密码错误</string>
+    <string name="text_user_info_add_friend">加个好友吧！</string>
+    <string name="text_main_exit">再按一次退出</string>
+
 </resources>
