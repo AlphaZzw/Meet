@@ -17,10 +17,13 @@ import com.alpha.framework.base.BaseUIActivity;
 import com.alpha.framework.bmob.BmobManager;
 import com.alpha.framework.bmob.IMUser;
 import com.alpha.framework.entity.Constants;
+import com.alpha.framework.manager.DialogManager;
 import com.alpha.framework.utils.LogUtils;
 import com.alpha.framework.utils.SpUtils;
+import com.alpha.framework.view.DialogView;
 import com.alpha.meet.MainActivity;
 import com.alpha.meet.R;
+import com.luozm.captcha.Captcha;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
@@ -39,6 +42,8 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     private EditText et_code;
     private Button btn_send_code;
     private Button btn_login;
+    private DialogView mCodeView;
+    private Captcha mCaptcha;
 
     private static final int H_TIME = 1001;
     //60s倒计时
@@ -70,7 +75,34 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
         LogUtils.i("Login");
 
         initView();
+        initDialogView();
 
+    }
+
+    private void initDialogView() {
+        mCodeView = DialogManager.getInstance().initView(this, R.layout.dialog_code_view);
+        mCaptcha = mCodeView.findViewById(R.id.captcha);
+        mCaptcha.setCaptchaListener(new Captcha.CaptchaListener() {
+            @Override
+            public String onAccess(long time) {
+                Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                DialogManager.getInstance().hide(mCodeView);
+                sendSMS();
+                return "验证通过,耗时" + time + "毫秒";
+            }
+
+            @Override
+            public String onFailed(int failCount) {
+                Toast.makeText(LoginActivity.this, "验证失败", Toast.LENGTH_SHORT).show();
+                return "验证失败,已失败" + failCount + "次";
+            }
+
+            @Override
+            public String onMaxFailed() {
+                Toast.makeText(LoginActivity.this, "验证超过次数，你的帐号被封锁", Toast.LENGTH_SHORT).show();
+                return "验证失败,帐号已封锁";
+            }
+        });
     }
 
     private void initView() {
@@ -90,7 +122,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
                 login();
                 break;
             case R.id.btn_send_code:
-                sendSMS();
+                DialogManager.getInstance().show(mCodeView);
                 break;
         }
     }
