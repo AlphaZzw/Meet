@@ -21,6 +21,7 @@ import com.alpha.framework.manager.DialogManager;
 import com.alpha.framework.utils.LogUtils;
 import com.alpha.framework.utils.SpUtils;
 import com.alpha.framework.view.DialogView;
+import com.alpha.framework.view.LoadingView;
 import com.alpha.meet.MainActivity;
 import com.alpha.meet.R;
 import com.luozm.captcha.Captcha;
@@ -66,6 +67,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
             return false;
         }
     });
+    private LoadingView mLoadingView;
 
 
     @Override
@@ -80,6 +82,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     }
 
     private void initDialogView() {
+        mLoadingView = new LoadingView(this);
         mCodeView = DialogManager.getInstance().initView(this, R.layout.dialog_code_view);
         mCaptcha = mCodeView.findViewById(R.id.captcha);
         mCaptcha.setCaptchaListener(new Captcha.CaptchaListener() {
@@ -119,6 +122,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
+                mLoadingView.show("正在登录...");
                 login();
                 break;
             case R.id.btn_send_code:
@@ -135,7 +139,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        final String code = et_code.getText().toString().trim();
+        String code = et_code.getText().toString().trim();
         if (TextUtils.isEmpty(code)) {
             Toast.makeText(this, getString(R.string.text_login_code_null),
                     Toast.LENGTH_SHORT).show();
