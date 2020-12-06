@@ -10,7 +10,7 @@ import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.QueryListener;
 
 public class BmobManager {
-    public static final String BMOB_SDK_ID = "/*18a690cf9061d3618f6ce8406493d40d*/";
+    public static final String BMOB_SDK_ID = "18a690cf9061d3618f6ce8406493d40d";
 
     private static volatile BmobManager mInstance = null;
 

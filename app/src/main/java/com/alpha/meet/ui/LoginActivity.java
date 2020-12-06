@@ -116,13 +116,13 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
         btn_login = (Button) findViewById(R.id.btn_login);
 
         btn_send_code.setOnClickListener(this);
+        btn_login.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                mLoadingView.show("正在登录...");
                 login();
                 break;
             case R.id.btn_send_code:
@@ -134,21 +134,24 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     private void login() {
         //1.判断手机号码和验证码不为空
         final String phone = et_phone.getText().toString().trim();
+        LogUtils.i("phone:" + phone);
         if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, getString(R.string.text_login_phone_null),
                     Toast.LENGTH_SHORT).show();
             return;
         }
         String code = et_code.getText().toString().trim();
+        LogUtils.i("code:" + code);
         if (TextUtils.isEmpty(code)) {
             Toast.makeText(this, getString(R.string.text_login_code_null),
                     Toast.LENGTH_SHORT).show();
             return;
         }
-
+        mLoadingView.show("正在登录...");
         BmobManager.getInstance().signOrLoginByMobilePhone(phone, code, new LogInListener<IMUser>() {
             @Override
             public void done(IMUser imUser, BmobException e) {
+                mLoadingView.hide();
                 if (e == null) {
                     //登录成功
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
