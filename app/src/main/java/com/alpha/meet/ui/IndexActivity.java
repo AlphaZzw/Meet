@@ -9,13 +9,14 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.alpha.framework.base.BaseUIActivity;
+import com.alpha.framework.bmob.BmobManager;
 import com.alpha.framework.entity.Constants;
 import com.alpha.framework.utils.LogUtils;
 import com.alpha.framework.utils.SpUtils;
 import com.alpha.meet.MainActivity;
 import com.alpha.meet.R;
 
-public class IndexActivity extends BaseUIActivity  {
+public class IndexActivity extends BaseUIActivity {
 
     private static final int SKIP_MAIN = 1000;
 
@@ -54,8 +55,12 @@ public class IndexActivity extends BaseUIActivity  {
             //2.如果非第一次启动，判断是否曾经登录过
             String token = SpUtils.getInstance().getString(Constants.SP_TOKEN, "");
             if (TextUtils.isEmpty(token)) {
-                //跳转到登录页面
-                intent.setClass(this, LoginActivity.class);
+                if (BmobManager.getInstance().isLogin()) {
+                    intent.setClass(this, MainActivity.class);
+                } else {
+                    //跳转到登录页面
+                    intent.setClass(this, LoginActivity.class);
+                }
             } else {
                 //跳转到主页
                 intent.setClass(this, MainActivity.class);

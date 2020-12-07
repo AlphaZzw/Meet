@@ -46,6 +46,10 @@ public class BmobManager {
         return BmobUser.getCurrentUser(IMUser.class);
     }
 
+    public boolean isLogin() {
+        return BmobUser.isLogin();
+    }
+
     /**
      * 发送短信验证码
      *
