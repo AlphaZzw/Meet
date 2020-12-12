@@ -46,6 +46,11 @@ public class BmobManager {
         return BmobUser.getCurrentUser(IMUser.class);
     }
 
+    /**
+     * 是否登录
+     *
+     * @return
+     */
     public boolean isLogin() {
         return BmobUser.isLogin();
     }
