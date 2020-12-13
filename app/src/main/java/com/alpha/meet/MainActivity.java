@@ -1,5 +1,6 @@
 package com.alpha.meet;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -88,6 +89,7 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
 
         initFragment();
 
+        //切换默认的选项卡
         checkMainTab(0);
     }
 
@@ -95,7 +97,6 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
      * 初始化Fragment
      */
     private void initFragment() {
-
         //星球
         if (mStarFragment == null) {
             mStarFragment = new StarFragment();
@@ -103,7 +104,6 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
             mStarTransaction.add(R.id.frameMainLayout, mStarFragment);
             mStarTransaction.commit();
         }
-
         //广场
         if (mSquareFragment == null) {
             mSquareFragment = new SquareFragment();
@@ -111,7 +111,6 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
             mSquareTransaction.add(R.id.frameMainLayout, mSquareFragment);
             mSquareTransaction.commit();
         }
-
         //聊天
         if (mChatFragment == null) {
             mChatFragment = new ChatFragment();
@@ -119,7 +118,6 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
             mChatTransaction.add(R.id.frameMainLayout, mChatFragment);
             mChatTransaction.commit();
         }
-
         //我的
         if (mMeFragment == null) {
             mMeFragment = new MeFragment();
@@ -164,6 +162,14 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
 
     }
 
+    /**
+     * 切换主页选项卡
+     *
+     * @param index 0：星球
+     *              1：广场
+     *              2：聊天
+     *              3：我的
+     */
     private void checkMainTab(int index) {
         switch (index) {
             case 0:
@@ -172,6 +178,11 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
                 iv_square.setImageResource(R.drawable.img_square);
                 iv_chat.setImageResource(R.drawable.img_chat);
                 iv_me.setImageResource(R.drawable.img_me);
+
+                tv_star.setTextColor(getResources().getColor(R.color.colorAccent));
+                tv_square.setTextColor(Color.BLACK);
+                tv_chat.setTextColor(Color.BLACK);
+                tv_me.setTextColor(Color.BLACK);
                 break;
 
             case 1:
@@ -180,6 +191,11 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
                 iv_square.setImageResource(R.drawable.img_square_p);
                 iv_chat.setImageResource(R.drawable.img_chat);
                 iv_me.setImageResource(R.drawable.img_me);
+
+                tv_star.setTextColor(Color.BLACK);
+                tv_square.setTextColor(getResources().getColor(R.color.colorAccent));
+                tv_chat.setTextColor(Color.BLACK);
+                tv_me.setTextColor(Color.BLACK);
                 break;
 
             case 2:
@@ -189,6 +205,11 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
                 iv_square.setImageResource(R.drawable.img_square);
                 iv_chat.setImageResource(R.drawable.img_chat_p);
                 iv_me.setImageResource(R.drawable.img_me);
+
+                tv_star.setTextColor(Color.BLACK);
+                tv_square.setTextColor(Color.BLACK);
+                tv_chat.setTextColor(getResources().getColor(R.color.colorAccent));
+                tv_me.setTextColor(Color.BLACK);
                 break;
 
             case 3:
@@ -198,9 +219,37 @@ public class MainActivity extends BaseUIActivity implements View.OnClickListener
                 iv_square.setImageResource(R.drawable.img_square);
                 iv_chat.setImageResource(R.drawable.img_chat);
                 iv_me.setImageResource(R.drawable.img_me_p);
+
+                tv_star.setTextColor(Color.BLACK);
+                tv_square.setTextColor(Color.BLACK);
+                tv_chat.setTextColor(Color.BLACK);
+                tv_me.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
         }
+    }
 
+    /**
+     * 防止重叠
+     * 当应用的内存紧张的时候，系统会回收掉Fragment对象
+     * 再一次进入的时候会重新创建Fragment
+     * 非原来对象，我们无法控制，导致重叠
+     *
+     * @param fragment
+     */
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (mStarFragment != null && fragment instanceof StarFragment) {
+            mStarFragment = (StarFragment) fragment;
+        }
+        if (mSquareFragment != null && fragment instanceof SquareFragment) {
+            mSquareFragment = (SquareFragment) fragment;
+        }
+        if (mChatFragment != null && fragment instanceof ChatFragment) {
+            mChatFragment = (ChatFragment) fragment;
+        }
+        if (mMeFragment != null && fragment instanceof MeFragment) {
+            mMeFragment = (MeFragment) fragment;
+        }
     }
 
     /**

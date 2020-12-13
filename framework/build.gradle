@@ -42,5 +42,6 @@ dependencies {
     api rootProject.ext.dependencies["okio"]
     api rootProject.ext.dependencies["gson"]
     api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["tagcloud"]
 
 }

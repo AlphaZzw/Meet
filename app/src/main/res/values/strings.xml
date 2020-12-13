@@ -31,6 +31,11 @@
     <string name="text_user_resuest_succeed">请求成功</string>
     <string name="text_user_resuest_fail">请求失败</string>
 
+    <string name="text_main_star_1">随机</string>
+    <string name="text_main_star_2">灵魂</string>
+    <string name="text_main_star_3">缘分</string>
+    <string name="text_main_star_4">恋爱</string>
+
     <string name="text_squate_love">爱</string>
     <string name="text_star_par_tips_1">请先完善个人信息 - 星座</string>
     <string name="text_star_par_tips_2">请先完善个人信息 - 年龄</string>
